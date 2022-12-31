@@ -1,31 +1,8 @@
 import { statement } from '../statement.js';
+import {invoicesJSON} from "../datas/invoices.js";
+import {playsJSON} from "../datas/plays.js";
 
 describe('statement', () => {
-  const playsJSON = {
-    hamlet: { name: 'Hamlet', type: 'tragedy' },
-    'as-like': { name: 'As You Like It', type: 'comedy' },
-    othello: { name: 'Othello', type: 'tragedy' },
-  };
-
-  const invoicesJSON = [
-    {
-      customer: 'BigCo',
-      performances: [
-        {
-          playID: 'hamlet',
-          audience: 55,
-        },
-        {
-          playID: 'as-like',
-          audience: 35,
-        },
-        {
-          playID: 'othello',
-          audience: 40,
-        },
-      ],
-    },
-  ];
   it('should print a statement', () => {
     const expected =
       '청구 내역 (고객명: BigCo)\n' +
