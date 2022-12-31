@@ -1,4 +1,4 @@
-import {band} from "../util.js";
+import {band, format} from "../util.js";
 
 export class Play {
     #id;
@@ -53,5 +53,9 @@ export class PerformanceBill {
         volumeCredits += Math.max(this.audience - 30, 0);
         if ('comedy' === this.#play.type) volumeCredits += Math.floor(this.audience / 5);
         return volumeCredits;
+    }
+
+    printDetails() {
+        return `  ${this.#play.name}: ${format(price / 100)} (${numOfAudience}석)\n`
     }
 }

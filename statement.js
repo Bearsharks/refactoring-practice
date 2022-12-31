@@ -1,14 +1,5 @@
 import {PerformanceBill} from "./bills/PerformanceBill.js";
-
-const format = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  minimumFractionDigits: 2,
-}).format;
-
-function printDetails(playName, price, numOfAudience) {
-  return `  ${playName}: ${format(price / 100)} (${numOfAudience}석)\n`
-}
+import {format} from "./util.js";
 
 export function statement(invoice, plays) {
   let totalAmount = 0;
@@ -27,7 +18,7 @@ export function statement(invoice, plays) {
     volumeCredits += performanceBill.credits;
 
     // 청구 내역을 출력한다.
-    result += printDetails(play.name, thisAmount, perf.audience);
+    result += performanceBill.printDetails();
   }
   result += `총액: ${format(totalAmount / 100)}\n`;
   result += `적립 포인트: ${volumeCredits}점\n`;
