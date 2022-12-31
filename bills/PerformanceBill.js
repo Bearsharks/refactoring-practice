@@ -29,18 +29,29 @@ export class PerformanceBill {
         this.#performance = performance;
     }
 
-    get bookingCost() {
+    get audience() {
+        return this.#performance.audience;
+    }
+    get cost() {
         if (this.#play.type === 'tragedy') {
-            return 40000 + band(this.#performance.audience, 30, Infinity) * 1000
+            return 40000 + band(this.audience, 30, Infinity) * 1000
         }
+
         if (this.#play.type === 'comedy') {
-            const basePrice = 30000 + (300 * this.#performance.audience);
-            if (this.#performance.audience > 20) {
-                const additionalCost = 10000 + 500 * band(this.#performance.audience, 20, Infinity);
+            const basePrice = 30000 + (300 * this.audience);
+            if (this.audience > 20) {
+                const additionalCost = 10000 + 500 * band(this.audience, 20, Infinity);
                 return basePrice + additionalCost;
             }
             return basePrice;
         }
         throw new Error(`알 수 없는 장르: ${this.#play.type}`);
+    }
+
+    get credits() {
+        let volumeCredits = 0;
+        volumeCredits += Math.max(this.audience - 30, 0);
+        if ('comedy' === this.#play.type) volumeCredits += Math.floor(this.audience / 5);
+        return volumeCredits;
     }
 }
