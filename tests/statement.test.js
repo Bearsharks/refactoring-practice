@@ -1,6 +1,6 @@
 import { statement } from '../statement.js';
-import {invoicesJSON} from "../datas/invoices.js";
-import {playsJSON} from "../datas/plays.js";
+import {invoicesJSON} from "../fixtures/invoices.js";
+import {playsJSON} from "../fixtures/plays.js";
 
 describe('statement', () => {
   it('should print a statement', () => {
