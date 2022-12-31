@@ -56,6 +56,6 @@ export class PerformanceBill {
     }
 
     printDetails() {
-        return `  ${this.#play.name}: ${format(price / 100)} (${numOfAudience}석)\n`
+        return `  ${this.#play.name}: ${format(this.cost / 100)} (${this.audience}석)\n`
     }
 }
