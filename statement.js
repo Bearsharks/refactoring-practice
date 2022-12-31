@@ -14,6 +14,12 @@ function calcComedyBookingCost(numOfAudience) {
   }
   return basePrice;
 }
+function calcCredit(numOfAudience, type) {
+  let volumeCredits = 0;
+  volumeCredits += Math.max(numOfAudience - 30, 0);
+  if ('comedy' === type) volumeCredits += Math.floor(numOfAudience / 5);
+  return volumeCredits;
+}
 
 export function statement(invoice, plays) {
   let totalAmount = 0;
@@ -29,6 +35,7 @@ export function statement(invoice, plays) {
     const play = plays[perf.playID];
     let thisAmount = 0;
 
+    // 공연 별 금액 계산
     switch (play.type) {
       case 'tragedy': // 비극
         thisAmount = calcTragedyBookingCost(perf.audience);
@@ -39,17 +46,15 @@ export function statement(invoice, plays) {
       default:
         throw new Error(`알 수 없는 장르: ${play.type}`);
     }
+    totalAmount += thisAmount;
 
     // 포인트를 적립한다.
-    volumeCredits += Math.max(perf.audience - 30, 0);
-    // 희극 관객 5명마다 추가 포인트를 제공한다.
-    if ('comedy' === play.type) volumeCredits += Math.floor(perf.audience / 5);
+    volumeCredits += calcCredit(perf.audience, play.type);
 
     // 청구 내역을 출력한다.
     result += `  ${play.name}: ${format(thisAmount / 100)} (${
       perf.audience
     }석)\n`;
-    totalAmount += thisAmount;
   }
   result += `총액: ${format(totalAmount / 100)}\n`;
   result += `적립 포인트: ${volumeCredits}점\n`;
