@@ -1,4 +1,4 @@
-import {band, format} from "../util.js";
+import {band} from "../util.js";
 
 export class TragedyPerformancePricingDelegate {
     #cost;
@@ -19,40 +19,28 @@ export class TragedyPerformancePricingDelegate {
 }
 
 
-export class PerformancePricingDelegate {
-    #play;
-    #performance;
-
-    constructor(play, performance) {
-        this.#play = play;
-        this.#performance = performance;
+export class ComedyPerformancePricingDelegate {
+    #cost;
+    #credits;
+    constructor(numOfAudience) {
+        this.#cost = this.calcCost(numOfAudience);
+        this.#credits = Math.max(numOfAudience - 30, 0) + Math.floor(numOfAudience / 5);
     }
-    get audience() {
-        return this.#performance.audience;
+    calcCost(numOfAudience) {
+        const basePrice = 30000 + (300 * numOfAudience);
+        if (numOfAudience > 20) {
+            const additionalCost = 10000 + 500 * band(numOfAudience, 20, Infinity);
+            return basePrice + additionalCost;
+        }
+        return basePrice;
     }
 
     get cost() {
-        // TODO 생성시 초기화
-        if (this.#play.type === 'tragedy') {
-            return 40000 + band(this.audience, 30, Infinity) * 1000
-        }
-
-        if (this.#play.type === 'comedy') {
-            const basePrice = 30000 + (300 * this.audience);
-            if (this.audience > 20) {
-                const additionalCost = 10000 + 500 * band(this.audience, 20, Infinity);
-                return basePrice + additionalCost;
-            }
-            return basePrice;
-        }
-        throw new Error(`알 수 없는 장르: ${this.#play.type}`);
+        return this.#cost;
     }
 
     get credits() {
-        let volumeCredits = 0;
-        volumeCredits += Math.max(this.audience - 30, 0);
-        if ('comedy' === this.#play.type) volumeCredits += Math.floor(this.audience / 5);
-        return volumeCredits;
+        return this.#credits;
     }
 }
 

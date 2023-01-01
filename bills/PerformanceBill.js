@@ -1,5 +1,8 @@
 import {format} from "../util.js";
-import {PerformancePricingDelegate, TragedyPerformancePricingDelegate} from "./PerformancePricingDelegate.js";
+import {
+    ComedyPerformancePricingDelegate,
+    TragedyPerformancePricingDelegate
+} from "./PerformancePricingDelegate.js";
 
 export class Play {
     #id;
@@ -32,7 +35,7 @@ export class PerformanceBill {
                 newBill.#pricingDelegate = new TragedyPerformancePricingDelegate(performance.audience);
                 break;
             case 'comedy' :
-                newBill.#pricingDelegate = new PerformancePricingDelegate(play, performance);
+                newBill.#pricingDelegate = new ComedyPerformancePricingDelegate(performance.audience);
                 break;
             default :
                 throw new Error(`알 수 없는 장르: ${this.#play.type}`);
