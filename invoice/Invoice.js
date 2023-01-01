@@ -16,10 +16,10 @@ export default class Invoice {
         return this.#bills.reduce((prevValue, bill) => bill.credits + prevValue, 0);
     }
 
-    statement() {
+    simpleStatement() {
         let result = `청구 내역 (고객명: ${this.#customerName})\n`;
         this.#bills.forEach(bill => {
-            result += bill.printDetails();
+            result += bill.printSimpleDetails();
         });
         result += `총액: ${format(this.totalAmount / 100)}\n`;
         result += `적립 포인트: ${this.volumeCredits}점\n`;
