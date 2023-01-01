@@ -1,5 +1,5 @@
 import {format} from "../util.js";
-import {PerformancePricingDelegate} from "./PerformancePricingDelegate.js";
+import {PerformancePricingDelegate, TragedyPerformancePricingDelegate} from "./PerformancePricingDelegate.js";
 
 export class Play {
     #id;
@@ -29,7 +29,7 @@ export class PerformanceBill {
         const newBill = new PerformanceBill(play, performance);
         switch (play.type) {
             case 'tragedy' :
-                newBill.#pricingDelegate = new PerformancePricingDelegate(play, performance);
+                newBill.#pricingDelegate = new TragedyPerformancePricingDelegate(performance.audience);
                 break;
             case 'comedy' :
                 newBill.#pricingDelegate = new PerformancePricingDelegate(play, performance);
@@ -55,6 +55,6 @@ export class PerformanceBill {
     }
 
     printDetails() {
-        return `  ${this.#play.name}: ${format(this.cost / 100)} (${this.audience}석)\n`
+        return `  ${this.#play.name}: ${format(this.cost / 100)} (${this.#performance.audience}석)\n`
     }
 }

@@ -1,6 +1,24 @@
 import {band, format} from "../util.js";
 
-// TODO 공연 타입별로 분리
+export class TragedyPerformancePricingDelegate {
+    #cost;
+    #credits;
+
+    constructor(numOfAudience) {
+        this.#cost = 40000 + band(numOfAudience, 30, Infinity) * 1000;
+        this.#credits = Math.max(numOfAudience - 30, 0);
+    }
+
+    get cost() {
+        return this.#cost;
+    }
+
+    get credits() {
+        return this.#credits;
+    }
+}
+
+
 export class PerformancePricingDelegate {
     #play;
     #performance;
