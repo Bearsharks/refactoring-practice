@@ -3,7 +3,7 @@ import Invoice from "./invoice/Invoice.js";
 
 export function statement(invoice, plays) {
   const bills = invoice.performances.map(perf =>
-      new PerformanceBill(plays[perf.playID], perf));
+      PerformanceBill.factory(plays[perf.playID], perf));
   const myInvoice = new Invoice(invoice.customer, bills);
   return myInvoice.statement();
 }

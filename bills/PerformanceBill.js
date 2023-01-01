@@ -24,6 +24,9 @@ export class PerformanceBill {
     #play;
     #performance;
 
+    static factory(play, performance) {
+        return new PerformanceBill(play, performance);
+    }
     constructor(play, performance) {
         this.#play = play;
         this.#performance = performance;
