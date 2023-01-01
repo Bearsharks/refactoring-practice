@@ -19,7 +19,8 @@ describe('statement', () => {
     const expected =
         `<h1>청구 내역 (고객명: BigCo)</h1>\n` +
         `<table>\n` +
-        `<tr><th>play</th><th>석</th><th>cost</th></tr>  <tr><td>Hamlet</td><td>55</td><td>$650.00</td></tr>\n` +
+        `<tr><th>play</th><th>석</th><th>cost</th></tr>\n` +
+        ` <tr><td>Hamlet</td><td>55</td><td>$650.00</td></tr>\n` +
         ` <tr><td>As You Like It</td><td>35</td><td>$580.00</td></tr>\n` +
         ` <tr><td>Othello</td><td>40</td><td>$500.00</td></tr>\n` +
         `</table>\n` +

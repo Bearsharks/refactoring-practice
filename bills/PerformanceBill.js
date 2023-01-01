@@ -60,4 +60,8 @@ export class PerformanceBill {
     printSimpleDetails() {
         return `  ${this.#play.name}: ${format(this.cost / 100)} (${this.#performance.audience}석)\n`
     }
+
+    printHTMLDetails() {
+        return ` <tr><td>${this.#play.name}</td><td>${this.#performance.audience}</td><td>${format(this.cost / 100)}</td></tr>\n`;
+    }
 }

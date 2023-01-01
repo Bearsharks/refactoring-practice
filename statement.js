@@ -12,7 +12,7 @@ export function htmlStatement(invoice, plays) {
   const bills = invoice.performances.map(perf =>
       PerformanceBill.factory(plays[perf.playID], perf));
   const myInvoice = new Invoice(invoice.customer, bills);
-  return myInvoice.simpleStatement();
+  return myInvoice.htmlStatement();
 }
 
 
