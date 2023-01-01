@@ -27,4 +27,11 @@ export class PerformancePricingDelegate {
         }
         throw new Error(`알 수 없는 장르: ${this.#play.type}`);
     }
+
+    get credits() {
+        let volumeCredits = 0;
+        volumeCredits += Math.max(this.audience - 30, 0);
+        if ('comedy' === this.#play.type) volumeCredits += Math.floor(this.audience / 5);
+        return volumeCredits;
+    }
 }
