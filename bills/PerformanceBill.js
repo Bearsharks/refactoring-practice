@@ -1,4 +1,5 @@
-import {band, format} from "../util.js";
+import {format} from "../util.js";
+import {PerformancePricingDelegate} from "./PerformancePricingDelegate.js";
 
 export class Play {
     #id;
@@ -23,32 +24,34 @@ export class Performance {
 export class PerformanceBill {
     #play;
     #performance;
-
+    #pricingDelegate;
     static factory(play, performance) {
-        return new PerformanceBill(play, performance);
+        const newBill = new PerformanceBill(play, performance);
+        switch (play.type) {
+            case 'tragedy' :
+                newBill.#pricingDelegate = new PerformancePricingDelegate(play, performance);
+                break;
+            case 'comedy' :
+                newBill.#pricingDelegate = new PerformancePricingDelegate(play, performance);
+                break;
+            default :
+                throw new Error(`알 수 없는 장르: ${this.#play.type}`);
+        }
+
+        return newBill;
     }
-    constructor(play, performance) {
+    constructor(play, performance, pricingDelegate) {
         this.#play = play;
         this.#performance = performance;
+        this.#pricingDelegate = pricingDelegate;
     }
 
     get audience() {
         return this.#performance.audience;
     }
-    get cost() {
-        if (this.#play.type === 'tragedy') {
-            return 40000 + band(this.audience, 30, Infinity) * 1000
-        }
 
-        if (this.#play.type === 'comedy') {
-            const basePrice = 30000 + (300 * this.audience);
-            if (this.audience > 20) {
-                const additionalCost = 10000 + 500 * band(this.audience, 20, Infinity);
-                return basePrice + additionalCost;
-            }
-            return basePrice;
-        }
-        throw new Error(`알 수 없는 장르: ${this.#play.type}`);
+    get cost() {
+        return this.#pricingDelegate.cost;
     }
 
     get credits() {
