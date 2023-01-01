@@ -1,5 +1,6 @@
 import {band, format} from "../util.js";
 
+// TODO 공연 타입별로 분리
 export class PerformancePricingDelegate {
     #play;
     #performance;
@@ -13,6 +14,7 @@ export class PerformancePricingDelegate {
     }
 
     get cost() {
+        // TODO 생성시 초기화
         if (this.#play.type === 'tragedy') {
             return 40000 + band(this.audience, 30, Infinity) * 1000
         }
@@ -35,3 +37,4 @@ export class PerformancePricingDelegate {
         return volumeCredits;
     }
 }
+

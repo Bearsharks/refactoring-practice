@@ -46,10 +46,6 @@ export class PerformanceBill {
         this.#pricingDelegate = pricingDelegate;
     }
 
-    get audience() {
-        return this.#performance.audience;
-    }
-
     get cost() {
         return this.#pricingDelegate.cost;
     }
