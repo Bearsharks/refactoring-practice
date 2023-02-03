@@ -66,9 +66,3 @@ PerformanceBill을 보면 가격계산과 포인트계산할때 type로 분기�
 1. 실패하는 테스트 작성
 2. bill과 invoice에 printHTMLDetails 매소드를 만들고 이를 통해 출력하게 함
 3. 테스트 한다.
-
-# 7. 더 해볼만한 것
-한가지 아쉬운것은 statement가 데이터를 그대로 받아 사용하기 때문에, 데이터 포맷에 의존적입니다.
-그래서 play와 performance의 repository를 만들어서
-bill과 invoice에서 필요한 정보만 쏙쏙 골라받아 사용하는 그런방식으로 하면 어떨까 생각해보았는데 
-너무 간 것 같아서 일단 두었고, 이것은 숙제로 남기도록 하겠습니다.
